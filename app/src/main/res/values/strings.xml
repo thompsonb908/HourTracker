@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HourTracker</string>
+    <string name="username_field">Username</string>
+    <string name="password_field">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_success">Congrats</string>
+</resources>
