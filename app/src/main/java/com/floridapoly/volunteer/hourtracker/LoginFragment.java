@@ -35,7 +35,7 @@ public class LoginFragment extends Fragment {
                 Toast.makeText((Activity) getContext(), "Input username and password", Toast.LENGTH_SHORT).show();
             } else {
                 // needs authentication
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getContext(), NavActivity.class);
                 startActivity(intent);
             }
         });
