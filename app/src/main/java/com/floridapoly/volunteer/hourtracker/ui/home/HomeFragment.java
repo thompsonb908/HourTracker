@@ -21,13 +21,16 @@ import com.floridapoly.volunteer.hourtracker.R;
 import com.floridapoly.volunteer.hourtracker.SessionListAdapter;
 import com.floridapoly.volunteer.hourtracker.StudySession;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     DBHelper db;
-
+    TextView totalHours;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,10 +46,46 @@ public class HomeFragment extends Fragment {
         });
         ListView listView = (ListView) root.findViewById(R.id.lvSessionList);
         db = new DBHelper(root.getContext());
+        totalHours = (TextView) root.findViewById(R.id.tvTotalHours);
 
-        SessionListAdapter adapter = new SessionListAdapter(root.getContext(), R.layout.adapter_view_layout, db.getAllSessions());
+        List<StudySession> totalList = db.getAllSessions();
+        SessionListAdapter adapter = new SessionListAdapter(root.getContext(), R.layout.adapter_view_layout, totalList);
         listView.setAdapter(adapter);
 
+        totalHours.setText(calculateTime(totalList));
+
         return root;
+    }
+
+    public String calculateTime(List<StudySession> list){
+        long totalHours = 0;
+        long totalMinutes = 0;
+        long totalSeconds = 0;
+
+        for (StudySession s : list){
+            long seconds = s.getElapsedSeconds();
+            long minutes = s.getElapsedMinutes();
+            long hours = s.getElapsedHours();
+
+            totalSeconds += seconds;
+            if (totalSeconds >= 60){
+                totalSeconds -= 60;
+                totalMinutes++;
+            }
+            totalMinutes += minutes;
+            if(totalMinutes >= 60){
+                totalMinutes -= 60;
+                totalHours++;
+            }
+            totalHours += hours;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(totalHours);
+        stringBuilder.append(":");
+        stringBuilder.append(totalMinutes);
+        stringBuilder.append(":");
+        stringBuilder.append(totalSeconds);
+
+        return  stringBuilder.toString();
     }
 }
