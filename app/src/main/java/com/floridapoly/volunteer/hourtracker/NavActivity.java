@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -48,13 +49,11 @@ public class NavActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO: switch to start new study session.
                 DBHelper db = new DBHelper(NavActivity.this);
-                StudySession s1 = new StudySession(new Date(), new Date(), Location.DORMS);
-                StudySession s2 = new StudySession(new Date(), new Date(), Location.IST);
-                StudySession s3 = new StudySession(new Date(), new Date(), Location.COFFEE_SHOP);
+                StudySession s1 = new StudySession(new Date(new Long("1610105837136")), new Date(new Long("1610135837136")), Location.DORMS);
+                StudySession s2 = new StudySession(new Date(new Long("1600105037136")), new Date(new Long("1600105837136")), Location.IST);
 
                 db.addSession(s1);
                 db.addSession(s2);
-                db.addSession(s3);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

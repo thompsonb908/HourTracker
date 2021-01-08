@@ -33,9 +33,9 @@ public class SessionListAdapter extends ArrayAdapter<StudySession> {
         Date startTime = getItem(position).getStartTime();
         Date endTime = getItem(position).getEndTime();
         Location location = getItem(position).getLocation();
-//        long hours = getItem(position).getElapsedHours();
-//        long minutes = getItem(position).getElapsedMinutes();
-//        long seconds = getItem(position).getElapsedSeconds();
+        long hours = getItem(position).getElapsedHours();
+        long minutes = getItem(position).getElapsedMinutes();
+        long seconds = getItem(position).getElapsedSeconds();
 
         StudySession s = new StudySession(startTime,endTime,location);
 
@@ -45,10 +45,21 @@ public class SessionListAdapter extends ArrayAdapter<StudySession> {
         TextView tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
         TextView tvEndTime = (TextView) convertView.findViewById(R.id.tvEndTime);
         TextView tvLocation = (TextView) convertView.findViewById(R.id.tvLocation);
+        //TextView tvTimeStudy = (TextView) convertView.findViewById(R.id.tvTimeStudied);
 
-        tvLocation.setText(location.toString());
+//        tvLocation.setText(location.toString());
         tvStartTime.setText(startTime.toString());
         tvEndTime.setText(endTime.toString());
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(hours);
+        sb.append(":");
+        sb.append(minutes);
+        sb.append(":");
+        sb.append(seconds);
+        sb.append(":");
+
+        tvLocation.setText(sb.toString());
 
         return convertView;
     }
