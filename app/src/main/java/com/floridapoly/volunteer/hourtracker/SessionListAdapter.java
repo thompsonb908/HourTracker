@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.w3c.dom.Text;
-
 import java.util.Date;
 import java.util.List;
 
@@ -45,9 +43,9 @@ public class SessionListAdapter extends ArrayAdapter<StudySession> {
         TextView tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
         TextView tvEndTime = (TextView) convertView.findViewById(R.id.tvEndTime);
         TextView tvLocation = (TextView) convertView.findViewById(R.id.tvLocation);
-        //TextView tvTimeStudy = (TextView) convertView.findViewById(R.id.tvTimeStudied);
+        TextView tvTimeStudy = (TextView) convertView.findViewById(R.id.tvTimeStudied);
 
-//        tvLocation.setText(location.toString());
+        tvLocation.setText(location.toString());
         tvStartTime.setText(startTime.toString());
         tvEndTime.setText(endTime.toString());
 
@@ -59,7 +57,7 @@ public class SessionListAdapter extends ArrayAdapter<StudySession> {
         sb.append(seconds);
         sb.append(":");
 
-        tvLocation.setText(sb.toString());
+        tvTimeStudy.setText(sb.toString());
 
         return convertView;
     }

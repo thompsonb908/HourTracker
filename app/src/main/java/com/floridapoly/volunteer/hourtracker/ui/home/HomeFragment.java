@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,17 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.floridapoly.volunteer.hourtracker.DBHelper;
-import com.floridapoly.volunteer.hourtracker.NavActivity;
 import com.floridapoly.volunteer.hourtracker.R;
 import com.floridapoly.volunteer.hourtracker.SessionListAdapter;
 import com.floridapoly.volunteer.hourtracker.StudySession;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
