@@ -4,42 +4,38 @@ import android.os.Build;
 import android.widget.Toast;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.Date;
 
 public class StudySession {
     private int id;
-    private Instant startTime;
-    private Instant endTime;
-    private Date date;
-    private Duration elapsedTime;
+    private Date startTime;
+    private Date endTime;
+    private long elapsedHours;
+    private long elapsedMinutes;
+    private long elapsedSeconds;
     private Location location;
+
+    private static final long secondInMillis = 1000;
+    private static final long minuteInMillis = secondInMillis * 60;
+    private static final long hourInMillis = minuteInMillis * 60;
+    private static final long dayInMillis = hourInMillis * 24;
 
     public StudySession(){
     }
 
-    public StudySession(int id, Instant startTime, Instant endTime, Date date, Location location) {
-        this.id = id;
+    public StudySession(Date startTime, Date endTime, Location location) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.date = date;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            this.elapsedTime = Duration.between(startTime, endTime);
-        }
         this.location = location;
-    }
+        long diff = endTime.getTime() - startTime.getTime();
 
-    public StudySession(int id, Instant startTime, Date date, Location location) {
-        this.id = id;
-        this.startTime = startTime;
-        this.date = date;
-        this.location = location;
-    }
-
-    public StudySession(int id, Instant startTime, Date date) {
-        this.id = id;
-        this.startTime = startTime;
-        this.date = date;
+        long elapsedDays = diff / dayInMillis;
+        diff = diff % dayInMillis;
+        this.elapsedHours = diff / hourInMillis;
+        diff = diff % hourInMillis;
+        this.elapsedMinutes = diff / minuteInMillis;
+        diff = diff % minuteInMillis;
+        this.elapsedSeconds = diff / secondInMillis;
     }
 
     public int getId() {
@@ -50,40 +46,39 @@ public class StudySession {
         this.id = id;
     }
 
-    public Instant getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Instant startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public Instant getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Instant endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
-    public Date getDate() {
-        return date;
+    public long getElapsedHours() {
+        return elapsedHours;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public long getElapsedMinutes() {
+        return elapsedMinutes;
     }
 
-    public Duration getElapsedTime() {
-        return elapsedTime;
+    public long getElapsedSeconds() {
+        return elapsedSeconds;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     public void setLocation(Location location) {
         this.location = location;
     }
-
-    public Location getLocation(){
-        return location;
-    }
-
 }
